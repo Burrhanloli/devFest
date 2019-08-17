@@ -8,12 +8,12 @@ abstract class ConfigState extends Equatable {
   ConfigState getStateCopy();
 }
 
-class UnConfigState extends ConfigState {
+class InitialConfigState extends ConfigState {
   @override
   String toString() => 'UnConfigState';
   @override
   ConfigState getStateCopy() {
-    return UnConfigState();
+    return InitialConfigState();
   }
 }
 

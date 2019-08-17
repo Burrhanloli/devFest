@@ -14,10 +14,18 @@ class ConfigBloc extends Bloc<ConfigEvent, ConfigState> {
   bool darkModeOn = false;
 
   @override
-  ConfigState get initialState => UnConfigState();
+  ConfigState get initialState => InitialConfigState();
 
   @override
   Stream<ConfigState> mapEventToState(
     ConfigEvent event,
-  ) async* {}
+  ) async* {
+    try {
+      yield InitialConfigState();
+      yield await event.applyAsync(currentState: currentState, bloc: this);
+    } catch (_, stacktrace) {
+      print('$_ $stacktrace');
+      yield currentState;
+    }
+  }
 }
